@@ -10,10 +10,12 @@ const Navber = ({storage,addToCart}) => {
     }
     
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100 sticky top-0 z-10">
             <div className="flex-1">
                 <a className="btn btn-ghost normal-case text-xl">E-Commrce</a>
+                <input  type="text" placeholder="Search" className="input input-bordered hidden md:block" />
             </div>
+    
 
             <div className="flex-none">
                 <div className="dropdown dropdown-end">

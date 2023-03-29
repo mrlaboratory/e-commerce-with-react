@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Modal from './components/Modal/Modal';
 
 import Navber from './components/Navbar/Navber';
 import Product from './components/Product/Product';
@@ -9,7 +10,10 @@ import { addToDb, getShoppingCart } from './utilities/fakedb';
 const App = () => {
   const [data, setData] = useState([])
   const [cart, setCart] = useState([])
+  const [modal, setModal] = useState([])
   const [storage, setStorage] = useState([])
+
+  const [isOpen,setIsOpen] = useState(false)
 
   useEffect(() => {
     fetch('https://dummyjson.com/products')
@@ -50,10 +54,13 @@ const App = () => {
       <Navber storage={storage} addToCart={addToCart}></Navber>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3'>
         {
-          data.map((product, i) => <Product key={i} {...product} addToCart={addToCart}></Product>)
+          data.map((product, i) => <Product key={i} setModal={setModal} {...product} addToCart={addToCart} setIsOpen={setIsOpen}></Product>)
         }
 
       </div>
+     {
+      isOpen ?  <Modal modal={modal} setIsOpen={setIsOpen}></Modal> : ''
+     }
       <ToastContainer />
     </div>
   );
